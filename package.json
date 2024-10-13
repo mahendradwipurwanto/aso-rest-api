@@ -1,0 +1,29 @@
+{
+  "name": "google-trend-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "morgan": "~1.9.1",
+    "cookie-parser": "~1.4.4",
+    "app-store-scraper": "^0.18.0",
+    "google-play-scraper": "^10.0.0",
+    "nlcst-to-string": "^4.0.0",
+    "ramda": "^0.30.1",
+    "retext": "^9.0.0",
+    "retext-english": "^5.0.0",
+    "retext-keywords": "^8.0.1",
+    "unified": "^11.0.5"
+  }
+}
