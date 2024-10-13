@@ -50,7 +50,7 @@ Get list of competitors based on id of preferred app at play store
 }
 ```
 
-## 2. App Store
+## App Store
 
 ### 1. Search Apps
 Search apps based on query keyword and set the limit on each request from app store data
