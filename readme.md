@@ -1,24 +1,99 @@
-# Google Trends API - Sequence
+# ASO REST API - Sequence
 
-### Check the [Postman Documentation Here](https://documenter.getpostman.com/view/27591148/2sAXxS9BjU)
+### Check the [Postman Documentation Here](https://documenter.getpostman.com/view/27591148/2sAXxS9BtE)
 
-## 1. Trends Daily
+## Play Store
+
+### 1. Search Apps
+Search apps based on query keyword and set the limit on each request from play store data
+
 ```url
-[GET] {your-host-api}/api/daily
+[GET] {your-host-api}/api/play-store/search
 ```
 
-#### Example Body Params
+#### Example Query Params
+
 ```json
 {
-    "date": "2020-10-27",
-    "geo": "id"
+  "query": "chrome",
+  "limit": 10
 }
 ```
 
-## 2. Coming Soon
+### 2. App Info
+Get the app info of selected app on play store based on app id
+
 ```url
-Heads UP!! more endpoint will come, if needed
+[GET] {your-host-api}/api/play-store/app-info
 ```
 
-## Find Country Code
-- [Google Country Code](https://sites.google.com/site/tech4teachlearn/googleapps/google-country-codes)
+#### Example Query Params
+
+```json
+{
+  "id": "com.gojek.app"
+}
+```
+
+### 3. Competitors
+Get list of competitors based on id of preferred app at play store
+
+```url
+[GET] {your-host-api}/api/play-store/competitors
+```
+
+#### Example Query Params
+
+```json
+{
+  "id": "com.android.chrome"
+}
+```
+
+## 2. App Store
+
+### 1. Search Apps
+Search apps based on query keyword and set the limit on each request from app store data
+
+```url
+[GET] {your-host-api}/api/app-store/search
+```
+
+#### Example Query Params
+
+```json
+{
+  "query": "Gojek",
+  "limit": 10
+}
+```
+
+### 2. App Info
+Get the app info of selected app on app store based on id
+
+```url
+[GET] {your-host-api}/api/app-store/app-info
+```
+
+#### Example Query Params
+
+```json
+{
+  "id": 944875099
+}
+```
+
+### 3. Competitors
+Get list of competitors based on id of preferred app at app store
+
+```url
+[GET] {your-host-api}/api/app-store/competitors
+```
+
+#### Example Query Params
+
+```json
+{
+  "id": 944875099
+}
+```
