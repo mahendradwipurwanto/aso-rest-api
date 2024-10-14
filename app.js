@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+const cors = require('cors');
 
 import indexRouter from './routes/index.js';
 import asoPlayStoreRouter from './routes/asoPlayStore.js';
@@ -12,6 +13,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+const corsOptions = {
+    // origin: env == "development" ? ["*"] : listOrigin,
+    origin: ["*"],
+    method: ['GET', 'POST', 'PUT', 'DELETE'],
+    optionsSuccessStatus: 200,
+    credentials: true
+}
+
+app.use(cors(corsOptions));
 
 app.use('/', indexRouter);
 app.use('/api/play-store', asoPlayStoreRouter);
