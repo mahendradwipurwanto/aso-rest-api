@@ -10,44 +10,7 @@ router.get('/search', async (req, res, next) => {
         const response = await searchPlayStoreApp(query, limit);
         res.json({
             status: 'ok',
-            data: response,
-                matrix: {
-                    appName: {
-                        label: "good",
-                        color: "green"
-                    },
-                    appSubtilte: {
-                        label: "noot good",
-                        color: "yellow"
-                    },
-                    appUrl: {
-                        label: "noot good",
-                        color: "yellow"
-                    },
-                    keywords: {
-                        label: "noot good",
-                        color: "yellow"
-                    },
-                    InstallEngagement: {
-                        label: "noot good",
-                        color: "yellow"
-                    },
-                    ReviewRatings: {
-                        label: "noot good",
-                        color: "yellow"
-                    },
-                    appUpdates: {
-                        label: "noot good",
-                        color: "yellow"
-                    },
-                    InAppPurchase: {
-                        label: "noot good",
-                        color: "yellow"
-                    },
-
-
-                }
-            
+            data: response
         });
        
 

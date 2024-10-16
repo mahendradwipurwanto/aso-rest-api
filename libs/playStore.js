@@ -30,7 +30,41 @@ async function getPlayStoreAppInfo(appId) {
             keywords: appInfo.genre,
             updates: `Last update ${updated}`,
             in_app: appInfo.priceText,
-            reviews_rating: `${appInfo.scoreText} (${appInfo.reviews})`
+            reviews_rating: `${appInfo.scoreText} (${appInfo.reviews})`,
+            matrix: {
+                appName: {
+                    label: "good",
+                    color: "green"
+                },
+                appSubtilte: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                appUrl: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                keywords: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                InstallEngagement: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                ReviewRatings: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                appUpdates: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                InAppPurchase: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+            }
         };
     } catch (error) {
         console.error(`Error fetching Play Store app info for appId: ${appId}`, error);

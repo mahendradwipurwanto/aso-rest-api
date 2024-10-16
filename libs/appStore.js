@@ -29,7 +29,41 @@ async function getAppStoreAppInfo(appId) {
             keywords: appInfo.primaryGenre,
             updates: `Last update ${updated}`,
             in_app: appInfo.free ? "Free" : appInfo.price,
-            reviews_rating: `${appInfo.score} (${appInfo.reviews})`
+            reviews_rating: `${appInfo.score} (${appInfo.reviews})`,
+            matrix: {
+                appName: {
+                    label: "good",
+                    color: "green"
+                },
+                appSubtilte: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                appUrl: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                keywords: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                InstallEngagement: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                ReviewRatings: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                appUpdates: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+                InAppPurchase: {
+                    label: "noot good",
+                    color: "yellow"
+                },
+            }
         };
     } catch (error) {
         console.error(`Error fetching App Store app info for appId: ${appId}`, error);
@@ -112,7 +146,7 @@ async function getSuggestedKeywords(term) {
             throw new Error('The term parameter is required');
         }
 
-        const suggestions = await itunes.suggest({ term });
+        const suggestions = await itunes.suggest({term});
 
         if (!suggestions) {
             throw new Error(`No suggestions found for term: ${term}`);
@@ -126,4 +160,4 @@ async function getSuggestedKeywords(term) {
 }
 
 
-export { getAppStoreAppInfo, getAppStoreAppReviews, searchAppStoreApp, competitorsAppStoreApp, getSuggestedKeywords };
+export {getAppStoreAppInfo, getAppStoreAppReviews, searchAppStoreApp, competitorsAppStoreApp, getSuggestedKeywords};
