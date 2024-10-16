@@ -1,5 +1,6 @@
 // #App Store
 import itunes from "app-store-scraper";
+import gplay from "google-play-scraper";
 
 /**
  * Fetches app information from the Apple App Store using the app ID.
@@ -140,21 +141,17 @@ async function competitorsAppStoreApp(appId) {
     }
 }
 
-async function getSuggestedKeywords(term) {
+async function getSuggestedKeywords(query, limit) {
     try {
-        if (!term) {
-            throw new Error('The term parameter is required');
+        const apps = await gplay.suggest({ term: query, num: limit });
+
+        if (!apps || apps.length === 0) {
+            throw new Error(`No apps found for the query: ${query}`);
         }
 
-        const suggestions = await itunes.suggest({term});
-
-        if (!suggestions) {
-            throw new Error(`No suggestions found for term: ${term}`);
-        }
-
-        return suggestions;
+        return apps;
     } catch (error) {
-        console.error(`Error fetching suggested keywords for term: ${term}`, error);
+        console.error(`Error searching for apps: ${query}`, error);
         throw error;
     }
 }

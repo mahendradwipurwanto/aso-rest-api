@@ -1,9 +1,4 @@
 import express from 'express';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-// const cors = require('cors');
-import cors from 'cors';
-
 
 import indexRouter from './routes/index.js';
 import asoPlayStoreRouter from './routes/asoPlayStore.js';
@@ -11,22 +6,15 @@ import asoAppStoreRouter from './routes/asoAppStore.js';
 
 const app = express();
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-const corsOptions = {
-    origin: (origin, callback) => {
-        // Allow requests from any origin
-        callback(null, true);
-    },
-    method: ['GET', 'POST', 'PUT', 'DELETE'],
-    optionsSuccessStatus: 200,
-    credentials: true
-}
-
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://azharimm.tk");
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+    next();
+});
 
 app.use('/', indexRouter);
 app.use('/api/play-store', asoPlayStoreRouter);
