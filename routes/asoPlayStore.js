@@ -1,5 +1,5 @@
 import express from 'express';
-import { searchPlayStoreApp, getPlayStoreAppInfo, competitorsPlayStoreApp } from '../libs/playStore.js';
+import { searchPlayStoreApp, getPlayStoreAppInfo, competitorsPlayStoreApp, searchPlayStoreTargetedKeywords } from '../libs/playStore.js';
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.get('/search', async (req, res, next) => {
 
         res.json({
             status: 'ok',
-            data: response,
+            data: response,E
         });
 
     } catch (error) {
@@ -62,5 +62,23 @@ router.get('/competitors', async (req, res, next) => {
         });
     }
 });
+router.get('/search-google-play-keywords', async (req, res) => {
+    try {
+        const { query, limit } = req.query;
+        const response = await searchPlayStoreTargetedKeywords(query, limit);
+
+        res.json({
+            status: 'ok',
+            data: response,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: 'error',
+            message: 'Something went wrong',
+        });
+    }
+});
+
 
 export default router;

@@ -1,5 +1,5 @@
 import express from 'express';
-import { searchAppStoreApp, getAppStoreAppInfo, competitorsAppStoreApp } from '../libs/appStore.js';
+import { searchAppStoreApp, getAppStoreAppInfo, competitorsAppStoreApp, getSuggestedKeywords } from '../libs/appStore.js';
 
 const router = express.Router();
 
@@ -54,6 +54,26 @@ router.get('/competitors', async (req, res, next) => {
             data: response,
         });
 
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: 'error',
+            message: 'Something went wrong',
+        });
+    }
+});
+router.get('/suggest-keywords', async (req, res) => {
+    try {
+        const { term } = req.query;
+
+        // Memanggil fungsi getSuggestedKeywords dari service
+        const suggestions = await getSuggestedKeywords(term);
+
+        // Kirimkan hasilnya sebagai JSON
+        res.json({
+            status: 'ok',
+            data: suggestions,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({

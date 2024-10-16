@@ -1,7 +1,9 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-const cors = require('cors');
+// const cors = require('cors');
+import cors from 'cors';
+
 
 import indexRouter from './routes/index.js';
 import asoPlayStoreRouter from './routes/asoPlayStore.js';

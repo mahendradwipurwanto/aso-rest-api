@@ -106,5 +106,24 @@ async function competitorsAppStoreApp(appId) {
     }
 }
 
+async function getSuggestedKeywords(term) {
+    try {
+        if (!term) {
+            throw new Error('The term parameter is required');
+        }
 
-export {getAppStoreAppInfo, getAppStoreAppReviews, searchAppStoreApp, competitorsAppStoreApp};
+        const suggestions = await itunes.suggest({ term });
+
+        if (!suggestions) {
+            throw new Error(`No suggestions found for term: ${term}`);
+        }
+
+        return suggestions;
+    } catch (error) {
+        console.error(`Error fetching suggested keywords for term: ${term}`, error);
+        throw error;
+    }
+}
+
+
+export { getAppStoreAppInfo, getAppStoreAppReviews, searchAppStoreApp, competitorsAppStoreApp, getSuggestedKeywords };

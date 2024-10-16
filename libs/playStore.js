@@ -121,4 +121,19 @@ async function competitorsPlayStoreApp(appId) {
     }));
 }
 
-export {getPlayStoreAppInfo, getPlayStoreAppReviews, searchPlayStoreApp, competitorsPlayStoreApp};
+async function searchPlayStoreTargetedKeywords(query, limit = 5) {
+    try {
+        const apps = await gplay.suggest({ term: query, num: limit });
+
+        if (!apps || apps.length === 0) {
+            throw new Error(`No apps found for the query: ${query}`);
+        }
+
+        return apps;
+    } catch (error) {
+        console.error(`Error searching for apps: ${query}`, error);
+        throw error;
+    }
+}
+
+export { getPlayStoreAppInfo, getPlayStoreAppReviews, searchPlayStoreApp, competitorsPlayStoreApp, searchPlayStoreTargetedKeywords };
