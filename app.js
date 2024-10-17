@@ -13,10 +13,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: (origin, callback) => {
-        // Allow requests from any origin
-        callback(null, true);
-    },
+    origin: "*",
     method: ['GET', 'POST', 'PUT', 'DELETE'],
     optionsSuccessStatus: 200,
     credentials: true
