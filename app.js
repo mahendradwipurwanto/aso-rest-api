@@ -3,18 +3,26 @@ import express from 'express';
 import indexRouter from './routes/index.js';
 import asoPlayStoreRouter from './routes/asoPlayStore.js';
 import asoAppStoreRouter from './routes/asoAppStore.js';
+import cookieParser from "cookie-parser";
+import cors from 'cors';
 
 const app = express();
 
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://azharimm.tk");
-    res.setHeader(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
-    next();
-});
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Allow requests from any origin
+        callback(null, true);
+    },
+    method: ['GET', 'POST', 'PUT', 'DELETE'],
+    optionsSuccessStatus: 200,
+    credentials: true
+}
+
+app.use(cors(corsOptions));
 
 app.use('/', indexRouter);
 app.use('/api/play-store', asoPlayStoreRouter);
@@ -32,6 +40,6 @@ app.use((err, req, res, next) => {
 });
 
 // Start the Express server
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log(`Server is running on port: 3000`);
 });
