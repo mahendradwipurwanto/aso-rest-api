@@ -132,9 +132,7 @@ async function competitorsAppStoreApp(appId) {
     try {
         const app = await itunes.app({id: appId});
         const keywords = app.genres;
-        const competitors = await Promise.all(keywords.map(keyword => searchAppStoreApp(keyword, 10)));
-        console.log("Competitors fetched successfully from the App Store");
-        return competitors;
+        return await Promise.all(keywords.map(keyword => searchAppStoreApp(keyword, 10))).then(results => results.flat());
     } catch (error) {
         console.error(`Error fetching competitors for appId: ${appId}`, error);
         throw error;
