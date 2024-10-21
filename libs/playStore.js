@@ -157,7 +157,7 @@ async function competitorsPlayStoreApp(appId) {
 
 async function searchPlayStoreTargetedKeywords(query, limit = 5) {
     try {
-        const apps = await gplay.suggest({ term: query, num: limit });
+        const apps = await gplay.suggest({term: query, num: limit});
 
         if (!apps || apps.length === 0) {
             throw new Error(`No apps found for the query: ${query}`);
@@ -170,4 +170,41 @@ async function searchPlayStoreTargetedKeywords(query, limit = 5) {
     }
 }
 
-export { getPlayStoreAppInfo, getPlayStoreAppReviews, searchPlayStoreApp, competitorsPlayStoreApp, searchPlayStoreTargetedKeywords };
+async function getOnPageMatrix(id) {
+    try {
+        return {
+            metadata: true,
+            design: true,
+            infographics: true,
+            articles: true,
+        }
+    } catch (error) {
+        console.error(`Error searching for generating matrix of on-page matrix: ${id}`, error);
+        throw error;
+    }
+}
+
+
+async function getOffPageMatrix(query, limit = 5) {
+    try {
+        return {
+            reviews: true,
+            articles: true,
+            infographics: true,
+            online: true,
+        }
+    } catch (error) {
+        console.error(`Error searching for apps: ${query}`, error);
+        throw error;
+    }
+}
+
+export {
+    getPlayStoreAppInfo,
+    getPlayStoreAppReviews,
+    searchPlayStoreApp,
+    competitorsPlayStoreApp,
+    searchPlayStoreTargetedKeywords,
+    getOnPageMatrix,
+    getOffPageMatrix
+};

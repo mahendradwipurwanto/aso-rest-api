@@ -1,5 +1,11 @@
 import express from 'express';
-import { searchAppStoreApp, getAppStoreAppInfo, competitorsAppStoreApp, getSuggestedKeywords } from '../libs/appStore.js';
+import {
+    searchAppStoreApp,
+    getAppStoreAppInfo,
+    competitorsAppStoreApp,
+    getSuggestedKeywords,
+    getOffPageMatrix, getOnPageMatrix
+} from '../libs/appStore.js';
 import {searchPlayStoreTargetedKeywords} from "../libs/playStore.js";
 
 const router = express.Router();
@@ -74,6 +80,42 @@ router.get('/suggest-keywords', async (req, res) => {
         const response = await searchPlayStoreTargetedKeywords(query, limit);
 
         // Kirimkan hasilnya sebagai JSON
+        res.json({
+            status: 'ok',
+            data: response,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: 'error',
+            message: 'Something went wrong',
+        });
+    }
+});
+
+router.get('/on-page', async (req, res) => {
+    try {
+        const {id} = req.query;
+        const response = await getOnPageMatrix(id);
+
+        res.json({
+            status: 'ok',
+            data: response,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: 'error',
+            message: 'Something went wrong',
+        });
+    }
+});
+
+router.get('/off-page', async (req, res) => {
+    try {
+        const { id } = req.query;
+        const response = await getOffPageMatrix(id);
+
         res.json({
             status: 'ok',
             data: response,
